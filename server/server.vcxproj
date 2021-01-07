@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KVStorage.cpp" />
+    <ClCompile Include="KVStorageServer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KVStorage.h" />
+    <ClInclude Include="KVStorageServer.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{7C9E22D6-35D2-47E9-B283-91C9BD0BA97A}</ProjectGuid>
@@ -122,8 +130,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

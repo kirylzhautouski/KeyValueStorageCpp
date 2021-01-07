@@ -123,6 +123,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="KVStorageClient.cpp" />
+    <ClCompile Include="NotExistingKeyException.cpp" />
+    <ClCompile Include="NotExistingKeySpaceException.cpp" />
+    <ClCompile Include="ResultSet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entry.h" />
+    <ClInclude Include="KVStorageClient.h" />
+    <ClInclude Include="NotExistingKeyException.h" />
+    <ClInclude Include="NotExistingKeySpaceException.h" />
+    <ClInclude Include="ResultSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
