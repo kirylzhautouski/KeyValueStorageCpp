@@ -158,3 +158,95 @@ TEST(TestKVStorage, TestRemove) {
 
 	CleanStorage();
 }
+
+TEST(TestKVStorage, TestRemoveAll) {
+	std::vector<char> key1 = { 'a', 'b', 'c' };
+	std::vector<char> value1 = { 'q', 'w', 'e', 'r', 't' };
+
+	std::vector<char> key2 = { 'z', 'x', 'c' };
+	std::vector<char> value2 = { 'v', 'b', 'n', 'm', 'q' };
+
+	KeyValueStorageCpp::KVStorage storage;
+
+	storage.CreateKeySpace("key_space1");
+	storage.Set("key_space1", key1, value1);
+	storage.Set("key_space1", key2, value2);
+
+	EXPECT_EQ(storage.Get("key_space1", key1), value1);
+	EXPECT_EQ(storage.Get("key_space1", key2), value2);
+	EXPECT_EQ(storage.CountKeys("key_space1"), 2);
+
+	storage.RemoveAll("key_space1");
+	EXPECT_EQ(storage.CountKeys("key_space1"), 0);
+
+	CleanStorage();
+}
+
+TEST(TestKVStorage, TestGetAllKVs) {
+	std::vector<char> key1 = { 'a', 'b', 'c' };
+	std::vector<char> value1 = { 'q', 'w', 'e', 'r', 't' };
+
+	std::vector<char> key2 = { 'z', 'x', 'c' };
+	std::vector<char> value2 = { 'v', 'b', 'n', 'm', 'q' };
+
+	KeyValueStorageCpp::KVStorage storage;
+
+	storage.CreateKeySpace("key_space1");
+	storage.Set("key_space1", key1, value1);
+	storage.Set("key_space1", key2, value2);
+
+	EXPECT_EQ(storage.Get("key_space1", key1), value1);
+	EXPECT_EQ(storage.Get("key_space1", key2), value2);
+	EXPECT_EQ(storage.CountKeys("key_space1"), 2);
+
+	std::vector<std::pair<std::vector<char>, std::vector<char>>> expected = { {key1, value1}, {key2, value2} };
+	EXPECT_EQ(storage.GetAllKVs("key_space1"), expected);
+
+	CleanStorage();
+}
+
+TEST(TestKVStorage, TestGetAllKVsEmpty) {
+	KeyValueStorageCpp::KVStorage storage;
+
+	storage.CreateKeySpace("key_space1");
+
+	std::vector<std::pair<std::vector<char>, std::vector<char>>> expected;
+	EXPECT_EQ(storage.GetAllKVs("key_space1"), expected);
+
+	CleanStorage();
+}
+
+TEST(TestKVStorage, TestRestoreIndex) {
+	std::vector<char> key1 = { 'a', 'b', 'c' };
+	std::vector<char> value1 = { 'q', 'w', 'e', 'r', 't' };
+
+	std::vector<char> key2 = { 'a', 'b', 'c' };
+	std::vector<char> value2 = { 'q', 'w', 'e', 'r', 't' };
+
+	std::vector<char> key3 = { '1', '2', 'c' };
+	std::vector<char> value3 = { '5', 'k', 'e', 'f', 't' };
+
+	{
+		KeyValueStorageCpp::KVStorage storage;
+
+		storage.CreateKeySpace("key_space1");
+		storage.CreateKeySpace("key_space2");
+
+		storage.Set("key_space1", key1, value1);
+		storage.Set("key_space1", key3, value3);
+		storage.Remove("key_space1", key3);
+
+		storage.Set("key_space2", key2, value2);
+	}
+
+	{
+		KeyValueStorageCpp::KVStorage storage;
+
+		EXPECT_EQ(storage.Get("key_space1", key1), value1);
+		EXPECT_EQ(storage.CountKeys("key_space1"), 1);
+		EXPECT_EQ(storage.Get("key_space2", key2), value2);
+		EXPECT_EQ(storage.CountKeys("key_space2"), 1);
+	}
+	
+	CleanStorage();
+}

@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <mutex>
+#include <thread>
 #include <unordered_map>
 
 #include "Index.h"
@@ -15,9 +17,14 @@ namespace KeyValueStorageCpp {
 
 		std::unordered_map<std::string, Index> index_for_key_space_;
 
+		std::mutex storage_mutex_;
+
 		std::string BuildKeySpaceSegmentsPath_(const std::string& key_space);
 		std::string BuildSegmentFileName_(int segment_number);
 		std::string BuildSegmentFilePath_(const std::string& key_space, int segment_number);
+
+		KeyValueStorageCpp::Index RestoreKeySpace_(const std::string& key_space_segments_path, const std::string& key_space);
+		void RestoreIndex_();
 	public:
 		KVStorage();
 
