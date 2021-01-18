@@ -8,19 +8,13 @@ namespace KeyValueStorageCpp {
 	template <typename K, typename V>
 	class Entry {
 	public:
+		std::pair<K, V> pair;
 
 		Entry() {};
-		std::pair<K, V> pair;
-		Entry<K, V>(K k, V v) {
-			pair = std::pair<K, V>(k, v);
-		}
-
+		Entry<K, V>(K k, V v);
 
 		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar& this->pair.first;
-			ar& this->pair.second;
-		}
+		void serialize(Archive& ar, const unsigned int version);
 	};
 }
+

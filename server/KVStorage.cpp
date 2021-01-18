@@ -1,3 +1,4 @@
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -78,7 +79,7 @@ void KeyValueStorageCpp::KVStorage::CreateKeySpace(const std::string& key_space)
 	std::lock_guard<std::mutex> lock(storage_mutex_);
 
 	if (index_for_key_space_.find(key_space) != index_for_key_space_.end()) {
-		throw new std::invalid_argument("key_space " + key_space + " already exists.");
+		throw std::invalid_argument("key_space " + key_space + " already exists.");
 	}
 
 	index_for_key_space_[key_space] = Index();
@@ -94,7 +95,7 @@ void KeyValueStorageCpp::KVStorage::DeleteKeySpace(const std::string& key_space)
 	std::lock_guard<std::mutex> lock(storage_mutex_);
 
 	if (index_for_key_space_.find(key_space) == index_for_key_space_.end()) {
-		throw new std::invalid_argument("key_space " + key_space + " does not exist.");
+		throw std::invalid_argument("key_space " + key_space + " does not exist.");
 	}
 
 	index_for_key_space_.erase(key_space);
@@ -200,7 +201,7 @@ std::vector<char> KeyValueStorageCpp::KVStorage::Get(const std::string& key_spac
 	auto index_it = index_for_key_space_.find(key_space);
 
 	if (index_it == index_for_key_space_.end()) {
-		throw new std::invalid_argument("key_space " + key_space + " does not exist.");
+		throw std::invalid_argument("key_space " + key_space + " does not exist.");
 	}
 
 	if (index_it->second.KeyExists(key)) {
@@ -211,7 +212,7 @@ std::vector<char> KeyValueStorageCpp::KVStorage::Get(const std::string& key_spac
 		return entry.GetValue();
 	}
 	else {
-		throw new std::invalid_argument("specified key does not exist.");
+		throw std::invalid_argument("specified key does not exist.");
 	}
 }
 

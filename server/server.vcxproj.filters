@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KVStorageServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="KVStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -28,13 +25,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KVStorageServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="KVStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,7 +39,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

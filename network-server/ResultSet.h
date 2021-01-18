@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 #include "Entry.h"
 
 namespace KeyValueStorageCpp {
@@ -13,20 +12,15 @@ namespace KeyValueStorageCpp {
 	class ResultSet {
 	public:
 		ResultSet() {};
-		ResultSet(std::vector<Entry<K, V>> vec)
-		{
-			this->entries = vec;
-		}
+		ResultSet(std::vector<Entry<K, V>> vec);
 
 		ResultSetConstIterator<K, V> begin() const;
 		ResultSetConstIterator<K, V> end() const;
+
 		std::vector<Entry<K, V>> entries;
 
 		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar& this->entries;
-		}
+		void serialize(Archive& ar, const unsigned int version);
 	};
 }
 
